@@ -1,0 +1,8 @@
+name: scss_manager
+
+services:
+  myservice:
+    type: php:8.1
+    via: cli
+    ssl: false
+    webroot: .

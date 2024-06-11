@@ -1,0 +1,9 @@
+parameters:
+    level: 8
+    treatPhpDocTypesAsCertain: false
+    paths:
+        - src
+    scanDirectories: 
+        - vendor
+    ignoreErrors:
+        # The below constants are defined when running the application from a web server

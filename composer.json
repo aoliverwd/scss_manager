@@ -1,0 +1,43 @@
+{
+    "name": "alexoliverwd/scss_wrapper",
+    "description": "A wrapper for SCSSPHP",
+    "keywords": [
+        "scss"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Alex Oliver",
+            "homepage": "https://github.com/aoliverwd",
+            "role": "Lead"
+        }
+    ],
+    "autoload": {
+        "files": [
+            "src/bootstrap.php"
+        ]
+    },
+    "prefer-stable": true,
+    "require": {
+        "php": ">=8.1",
+        "scssphp/scssphp": "^1.12"
+    },
+    "require-dev": {
+        "pestphp/pest": "^2.34",
+        "phpstan/phpstan": "^1.11"
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    },
+    "scripts": {
+        "test" : [
+            "./vendor/bin/phpstan analyse -c phpstan.neon",
+            "@unit"
+        ],
+        "unit" : [
+            "./vendor/bin/pest"
+        ]
+    }
+}
