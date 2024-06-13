@@ -11,8 +11,8 @@ use SCSSWrapper\Model\Compiler as CompilerModel;
 class Compiler
 {
     private string $compiled_blob = '';
-    private object $scss_compiler;
-    private object $compiler_model;
+    public SCSSPHPCompiler $scss_compiler;
+    private CompilerModel $compiler_model;
 
     /**
      * Constructor
