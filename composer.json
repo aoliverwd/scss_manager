@@ -1,6 +1,6 @@
 {
-    "name": "alexoliverwd/scss_wrapper",
-    "description": "A wrapper for SCSSPHP",
+    "name": "alexoliverwd/scss_manager",
+    "description": "A wrapper for SCSSPHP allowing for bulk compilation",
     "keywords": [
         "scss"
     ],
