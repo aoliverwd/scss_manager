@@ -57,7 +57,7 @@ class Compiler
                 try {
                     if (is_dir($export_file_location)) {
                         $filename = hash('crc32b', $this->compiled_blob) . '.css';
-                        $export_file_location .= $filename;
+                        $export_file_location .= (substr($export_file_location, -1) !== '/' ? '/' : '') . $filename;
                     }
                 } catch (\Exception $e) {
                     exit($e->getMessage());
