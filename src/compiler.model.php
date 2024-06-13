@@ -15,7 +15,7 @@ class Compiler
      */
     public function __construct(array $options = [])
     {
-        $this->location = isset($options['db_location']) ? $options['db_location'] : '';
+        $this->location = isset($options['db_location']) ? $options['db_location'] : __DIR__ . '/assets.db';
         if (!empty($this->location)) {
             try {
                 $this->connection = new \SQLite3($this->location);

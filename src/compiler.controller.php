@@ -10,7 +10,7 @@ use SCSSWrapper\Model\Compiler as CompilerModel;
  */
 class Compiler
 {
-    private string $compiled_text = '';
+    private string $compiled_blob = '';
     private object $scss_compiler;
     private object $compiler_model;
 
@@ -47,13 +47,13 @@ class Compiler
                 if (file_exists($asset_location) && method_exists($this->scss_compiler, 'compileFile')) {
                     $result = $this->scss_compiler->compileFile($asset_location);
                     $css = $result->getCss();
-                    $this->compiled_text .= is_string($css) ? $css : '';
+                    $this->compiled_blob .= is_string($css) ? $css : '';
                 }
             }, array_filter($scss_asset_locations));
 
             // Export to file
-            if (!empty($this->compiled_text)) {
-                file_put_contents($export_file_location, $this->compiled_text);
+            if (!empty($this->compiled_blob)) {
+                file_put_contents($export_file_location, $this->compiled_blob);
             }
         }
 
