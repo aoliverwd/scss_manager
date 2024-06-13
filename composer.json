@@ -38,6 +38,9 @@
         ],
         "unit" : [
             "./vendor/bin/pest"
+        ],
+        "unit-debug" : [
+            "./vendor/bin/pest --debug"
         ]
     }
 }

@@ -6,6 +6,8 @@ use PHPUnit\Framework\TestCase as BaseTestCase;
 
 class TestCase extends BaseTestCase
 {
+    public static int $compile_time;
+
     public static function getPaths(): object
     {
         return (object) [
@@ -15,12 +17,12 @@ class TestCase extends BaseTestCase
         ];
     }
 
-    public static function cleanUp(string $file_name): bool
+    public static function cleanUp(array $file_names): void
     {
-        if (file_exists($file_name)) {
-            return unlink($file_name);
-        }
-
-        return false;
+        array_map(function ($file_name) {
+            if (file_exists($file_name)) {
+                unlink($file_name);
+            }
+        }, $file_names);
     }
 }

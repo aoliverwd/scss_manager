@@ -69,8 +69,15 @@ class Compiler
     {
         if ($this->compiler_model instanceof CompilerModel) {
             $asset_records = $this->compiler_model->getAssetInfo($scss_asset_locations);
+            if (!empty($asset_records)) {
+                foreach ($asset_records as $asset) {
+                    if ($asset['updated']) {
+                        return true;
+                    }
+                }
+            }
         }
 
-        return true;
+        return false;
     }
 }
