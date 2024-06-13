@@ -35,7 +35,7 @@ class Compiler
     /**
      * Compile SCSS assets
      * @param  array<string> $scss_asset_locations
-     * @param  string $export_file_location
+     * @param  string $export_file_location [Can be file or folder location]
      * @return string|null
      */
     public function compile(array $scss_asset_locations, string $export_file_location): string|null
@@ -53,6 +53,16 @@ class Compiler
 
             // Export to file
             if (!empty($this->compiled_blob)) {
+                // Should generate an export filename
+                try {
+                    if (is_dir($export_file_location)) {
+                        $filename = hash('crc32b', $this->compiled_blob) . '.css';
+                        $export_file_location .= $filename;
+                    }
+                } catch (\Exception $e) {
+                    exit($e->getMessage());
+                }
+
                 file_put_contents($export_file_location, $this->compiled_blob);
             }
         }
