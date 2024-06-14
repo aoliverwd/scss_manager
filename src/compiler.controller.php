@@ -41,7 +41,7 @@ class Compiler
     public function compile(array $scss_asset_locations, string $export_file_location): string|null
     {
         // Check if should recompile asset
-        if ($this->shouldReCompile($scss_asset_locations)) {
+        if ($this->shouldReCompile($scss_asset_locations, $export_file_location)) {
             // Iterate through each asset location
             array_map(function ($asset_location) {
                 if (file_exists($asset_location) && method_exists($this->scss_compiler, 'compileFile')) {
@@ -64,6 +64,7 @@ class Compiler
                 }
 
                 file_put_contents($export_file_location, $this->compiled_blob);
+                return $export_file_location;
             }
         }
 
@@ -73,10 +74,15 @@ class Compiler
     /**
      * Check if re compile is required
      * @param  array<string>  $scss_asset_locations
+     * @param  string $export_file_location
      * @return boolean
      */
-    private function shouldReCompile(array $scss_asset_locations): bool
+    private function shouldReCompile(array $scss_asset_locations, string $export_file_location): bool
     {
+        if (is_dir($export_file_location) || !file_exists($export_file_location)) {
+            return true;
+        }
+
         if ($this->compiler_model instanceof CompilerModel) {
             $asset_records = $this->compiler_model->getAssetInfo($scss_asset_locations);
             if (!empty($asset_records)) {
