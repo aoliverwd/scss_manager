@@ -1,9 +1,9 @@
 <?php
 
-namespace SCSSWrapper\Controller;
+namespace SCSSWrapper\Controllers;
 
 use ScssPhp\ScssPhp\Compiler as SCSSPHPCompiler;
-use SCSSWrapper\Model\Compiler as CompilerModel;
+use SCSSWrapper\Models\Compiler as CompilerModel;
 
 /**
  * SCSS Compiler class

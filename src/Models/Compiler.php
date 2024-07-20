@@ -1,6 +1,6 @@
 <?php
 
-namespace SCSSWrapper\Model;
+namespace SCSSWrapper\Models;
 
 class Compiler
 {
@@ -18,7 +18,13 @@ class Compiler
         $this->location = isset($options['db_location']) ? $options['db_location'] : __DIR__ . '/assets.db';
         if (!empty($this->location)) {
             try {
+                // Instantiate database connection
                 $this->connection = new \SQLite3($this->location);
+
+                // Change SQLite database journal mode to WAL
+                $this->connection->exec('PRAGMA journal_mode = wal;');
+
+                // Run database checks
                 $this->runDBChecks();
             } catch (\Exception $e) {
                 exit($e);
@@ -147,5 +153,14 @@ class Compiler
         }
 
         return $return_assets;
+    }
+
+    /**
+     * Close database connection
+     * @return void
+     */
+    public function close(): void
+    {
+        $this->connection->close();
     }
 }

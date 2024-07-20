@@ -1,7 +1,7 @@
 <?php
 
 use Tests\TestCase;
-use SCSSWrapper\Controller\Compiler;
+use SCSSWrapper\Controllers\Compiler;
 
 test('Compile', function () {
     $paths = TestCase::getPaths();

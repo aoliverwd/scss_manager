@@ -13,9 +13,9 @@
         }
     ],
     "autoload": {
-        "files": [
-            "src/bootstrap.php"
-        ]
+        "psr-4": {
+            "SCSSWrapper\\": "src/"
+        }
     },
     "prefer-stable": true,
     "require": {
