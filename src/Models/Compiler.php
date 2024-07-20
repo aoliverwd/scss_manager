@@ -152,6 +152,10 @@ class Compiler
             }
         }
 
+        // Close database
+        $this->close();
+
+        // Return assets
         return $return_assets;
     }
 
