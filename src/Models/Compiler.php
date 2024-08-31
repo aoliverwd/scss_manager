@@ -123,7 +123,7 @@ class Compiler
 
                     if ($statement instanceof \SQLite3Stmt) {
                         $add_result = $statement->execute();
-                        $statement->close();
+                        // $statement->close();
 
                         // Error adding record
                         if (!$add_result) {
@@ -146,7 +146,7 @@ class Compiler
 
                     if ($statement instanceof \SQLite3Stmt) {
                         $statement->execute();
-                        $statement->close();
+                        // $statement->close();
                     }
                 }
             }
