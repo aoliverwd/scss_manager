@@ -13,6 +13,7 @@ class Compiler
     private string $compiled_blob = '';
     public SCSSPHPCompiler $scss_compiler;
     private CompilerModel $compiler_model;
+    private bool $forceRefresh;
 
     /**
      * Constructor
@@ -30,6 +31,7 @@ class Compiler
 
         $this->scss_compiler = new SCSSPHPCompiler($cache_options);
         $this->compiler_model = new CompilerModel($options);
+        $this->forceRefresh = isset($options['forceRefresh']) ? boolval($options['forceRefresh']) : false;
     }
 
     /**
@@ -79,6 +81,10 @@ class Compiler
      */
     private function shouldReCompile(array $scss_asset_locations, string $export_file_location): bool
     {
+        if ($this->forceRefresh) {
+            return true;
+        }
+
         if (is_dir($export_file_location) || !file_exists($export_file_location)) {
             return true;
         }
