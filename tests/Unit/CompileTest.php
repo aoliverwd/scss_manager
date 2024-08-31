@@ -67,3 +67,31 @@ test('Compile Directory Location', function () {
 
     expect($compiled_file_exists)->toBeTrue();
 });
+
+test('Force Refresh', function () {
+    $paths = TestCase::getPaths();
+
+    $compile = new Compiler([
+        'db_location' => $paths->database,
+        'forceRefresh' => true
+    ]);
+
+    $compiled = $compile->compile([
+        $paths->scss . 'one.scss',
+        $paths->scss . 'two.scss'
+    ], $paths->compiled);
+
+    $compiled_file_exists = !is_dir($compiled) && file_exists($compiled);
+
+    TestCase::cleanUp([
+        $paths->database
+    ]);
+
+    if ($compiled_file_exists) {
+        TestCase::cleanUp([
+            $compiled
+        ]);
+    }
+
+    expect($compiled_file_exists)->toBeTrue();
+});

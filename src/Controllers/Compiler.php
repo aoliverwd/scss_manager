@@ -23,7 +23,7 @@ class Compiler
     {
         $cache_options = [];
 
-        foreach (['cacheDir', 'prefix', 'forceRefresh'] as $option_name) {
+        foreach (['cacheDir', 'prefix'] as $option_name) {
             if (isset($options[$option_name])) {
                 $cache_options[$option_name] = $options[$option_name];
             }
