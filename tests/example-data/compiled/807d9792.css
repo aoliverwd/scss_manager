@@ -1,0 +1,9 @@
+body {
+  background-color: hotpink;
+}
+body main {
+  padding: 20px;
+}
+#foo {
+  font-family: sans-serif;
+}

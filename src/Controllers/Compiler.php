@@ -14,6 +14,7 @@ class Compiler
     public SCSSPHPCompiler $scss_compiler;
     private CompilerModel $compiler_model;
     private bool $forceRefresh;
+    private bool $addCtime;
 
     /**
      * Constructor
@@ -32,6 +33,7 @@ class Compiler
         $this->scss_compiler = new SCSSPHPCompiler($cache_options);
         $this->compiler_model = new CompilerModel($options);
         $this->forceRefresh = isset($options['forceRefresh']) ? boolval($options['forceRefresh']) : false;
+        $this->addCtime = isset($options['addCtime']) ? boolval($options['addCtime']) : false;
     }
 
     /**
@@ -66,11 +68,11 @@ class Compiler
                 }
 
                 file_put_contents($export_file_location, $this->compiled_blob);
-                return $export_file_location;
+                return $export_file_location . ($this->addCtime ? '?ctime=' . filectime($export_file_location) : '');
             }
         }
 
-        return file_exists($export_file_location) ? $export_file_location : null;
+        return file_exists($export_file_location) ? $export_file_location . ($this->addCtime ? '?ctime=' . filectime($export_file_location) : '') : null;
     }
 
     /**

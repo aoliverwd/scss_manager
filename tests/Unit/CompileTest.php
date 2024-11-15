@@ -95,3 +95,34 @@ test('Force Refresh', function () {
 
     expect($compiled_file_exists)->toBeTrue();
 });
+
+
+test('Add Change Time', function () {
+    $paths = TestCase::getPaths();
+
+    $compile = new Compiler([
+        'db_location' => $paths->database,
+        'forceRefresh' => true,
+        'addCtime' => true
+    ]);
+
+    $compiled = $compile->compile([
+        $paths->scss . 'one.scss',
+        $paths->scss . 'two.scss'
+    ], $paths->compiled);
+
+    $compiled_file_exists = !is_dir($compiled) && file_exists($compiled);
+    $ctime_exists = preg_match('/\?ctime=[0-9]{10}/', $compiled);
+
+    TestCase::cleanUp([
+        $paths->database
+    ]);
+
+    if ($compiled_file_exists) {
+        TestCase::cleanUp([
+            $compiled
+        ]);
+    }
+
+    expect(boolval($ctime_exists))->toBeTrue();
+});
